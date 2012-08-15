@@ -1,0 +1,16 @@
+;;; visitor request admin pages 
+;;; this setup is for general purpose requests.  for special cases, use gsc as an example
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; images page
+>aulist=requeststitle
+title=label h3|admintitle|requestslab::User Requests
+
+>aulist=requestsform
+form=visitorrequestdata
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; page definitions
+>pagedef
+requests|0|##sitetitle - User Requests|User Requests
+
+>buildlist
+requests=admin(adminlogo,requeststitle,requestsform)

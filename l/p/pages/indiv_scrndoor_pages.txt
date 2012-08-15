@@ -1,0 +1,34 @@
+;;; admin pages for auth_individual/screendoor security
+;;;
+
+>>>needtologin
+You need to log in before you can access this page.  If you are already logged in,
+you do not have the proper authorization.  Contact us if you think you have reached
+this page in error.
+<<<
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; authorizations page
+>aulist=authorizationstitle
+title=label h3|admintitle|authorizelab::User Authorizations
+
+>aulist=authorizationsform
+form=auth_individual
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; form pieces
+>aulist=logintitle
+title=label h3|admintitle|loginlab::Administrative Login
+
+>aulist=loginform
+login<<loginform=auth_screendoor
+
+>aulist=needtologin
+needtologin=text essay|needtologin
+login<<loginform=auth_screendoor
+
+>buildlist
+authorizations=admin(adminlogo,authorizationstitle,authorizationsform)
+form/1=admin(adminlogo,logintitle,loginform)
+form/loginform/collecting=admin(adminlogo,logintitle,loginform)
+form/loginform/securityquestion=admin(adminlogo,logintitle,loginform)
+form/loginform/updatepassword=admin(adminlogo,logintitle,loginform)
+form/loginform/register=admin(adminlogo,logintitle,loginform)

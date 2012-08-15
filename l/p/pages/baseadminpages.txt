@@ -1,0 +1,46 @@
+;;; standard admin pages for all sites -- images, files, and messages
+;;;
+
+>aulist=admin
+body=body
+ adminpage=div adminpage
+  * ;admin logo -- defined in including file
+  homelink=emptyrect homelinkmask|home
+  title=div admintitle
+   * ;admin page title and subtitle -- see below
+  content=div admincontent
+   * ;admin page title -- see below
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; images page
+>aulist=imagestitle
+title=label h3|admintitle|imageslab::Image Management
+
+>aulist=imagesform
+form=imagemanagement
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; files page
+>aulist=filestitle
+title=label h3|admintitle|fileslab::Uploaded File Management
+
+>aulist=filesform
+form=filemanagement
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; message
+>aulist=messagetitle
+placeholder=emptyrect
+
+>aulist=message
+message=message
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; page definitions
+>pagedef
+authorizations|0|##sitetitle - User Authorizations|User Authorizations
+images|0|##sitetitle - Image Management|Image Management
+files|0|##sitetitle - File Management|File Management
+form|0|##sitetitle - Filling out Form|Form
+form/0|0|##sitetitle - Message|Message
+
+>buildlist
+images=admin(adminlogo,imagestitle,imagesform)
+files=admin(adminlogo,filestitle,filesform)
+form/0=admin(adminlogo,messagetitle,message)

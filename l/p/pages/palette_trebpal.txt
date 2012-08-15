@@ -1,0 +1,54 @@
+; trebuchet-palatino text palette
+; default colors
+##trebpalbak=ffffff
+##trebpalcell=eeeeee
+##trebpalloudbak=ffaaaa
+
+.essay
+	/div
+		padding lr:25
+	/h1
+		bkimage p/hglc/src/h1back.png|c|c
+		font arial
+		fontsize 23
+		justify c
+		padding tlrb:8
+		margin tlrb:15 
+	/h2
+		justify c
+	/h2,h3	
+		fontsize 20
+		padding t:12 b:0
+	/h4
+		padding t:12 b:0
+		fontsize 16
+		fontattribs b
+	/h5
+		padding tb:0
+		fontsize 11
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0		
+	/table
+		margin t:8
+	/td,th
+		border tlrb:##trebpalbak|3
+	/dt
+		font impact
+		letterspacing 3
+		fontsize 24
+		justify c
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i		
+	/blockquote,dl
+		margin t:8 lr:12
+		padding t:0 lrb:6
+		bkcolor ##trebpalloudbak
+	/div div
+		bkcolor ##trebpalcell
+		width 220
+		padding lrb:15		

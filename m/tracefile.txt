@@ -1,0 +1,2 @@
+[14-Aug-2012 22:05:41] PHP Notice:  ob_end_clean() [<a href='ref.outcontrol'>ref.outcontrol</a>]: failed to delete buffer. No buffer to delete in C:\dev\rwe\exception.php on line 3
+[14-Aug-2012 22:05:41] PHP Notice:  Undefined variable: qqs in C:\dev\rwe\exception.php on line 45

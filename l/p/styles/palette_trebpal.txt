@@ -1,0 +1,87 @@
+; trebuchet-palatino text palette
+; default colors
+##trebpalbak=ffffff
+##trebpaldiv=eeeeee
+##trebpalcell=eeeeee
+##trebpalcellhdr=e0e0e0
+##trebpalloudbak=ffaaaa
+##trebpallinkcolor=000088
+##trebpalhdrmargin=15
+##trebpaltxtmargin=20
+##trebpalbulletmargin=37
+##trebpaltextcolor=000000
+
+; .essay
+	/h1
+		fontsize 23
+	/h2
+		fontsize 23
+		padding t:12 b:0
+	/h3	
+		fontsize 20
+		padding t:12 b:0
+	/h4
+		padding t:12 b:0
+		fontsize 16
+		fontattribs b
+	/h5
+		justify c
+		fontsize 11
+	/h1,h2,h3,h4,h5
+		margin lr:##trebpalhdrmargin
+		font trebuchet
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0			
+	/table
+		margin t:8 lr:##trebpaltxtmargin
+	/td,th
+		border tlrb:##trebpalbak|3
+		padding tb:2 lr:4
+	/td
+		bkcolor ##trebpalcell
+	/th
+		fontattribs b
+		bkcolor ##trebpalcellhdr		
+	/dt
+		font impact
+		letterspacing 3
+		fontsize 24
+		justify c
+	/img
+		border tlrb:ffffff|2
+		margin tlrb:0
+		padding tlrb:0	
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i
+	/blockquote			
+		bkcolor ##trebpaldiv
+		padding tb:6
+	/blockquote,dl
+		margin t:8 lr:30
+		padding t:0 lrb:6
+		bkcolor ##trebpalloudbak
+	/li
+		margin lr:##trebpalbulletmargin
+	/p,th,td,li,blockquote
+		margin lr:##trebpaltxtmargin
+		font palatino
+		fontsize 14
+	/p
+		margin t:6		
+	/div div
+		bkcolor ##trebpaldiv
+		width 220
+		padding lrb:15
+		position R
+		margin lr:##trebpaltxtmargin
+	/hr
+		clear both
+		hide 1			
+	/a
+		color ##trebpallinkcolor
+		border b:##trebpallinkcolor|1|dashed

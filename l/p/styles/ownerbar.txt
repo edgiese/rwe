@@ -1,0 +1,40 @@
+; standard owner bar style definitions.  override colors with earlier definitions
+##ownerbarbkgrndhi=aaffaa
+##ownerbartexthi=000000
+##ownerbarbkgrnd=008800
+##ownerbartext=ffffff
+##ownerbarborder=000000
+
+#ownerbar_trigger/div
+		bkcolor ##ownerbarbkgrnd
+		border tlrb:##ownerbarborder|1
+		position S 0|0
+		width 20
+		height 20
+		zindex 100
+		%8:hide 2
+
+#ownerbar_menu
+	/div
+		bkcolor ##ownerbarbkgrnd
+		border tlrb:##ownerbarborder|1
+		position S 0|0
+		zindex 101
+		hide 1
+		%8:hide 2
+; h1 colors are for highlight, the will be changed at startup to h2 colors
+	/h1
+		fontattribs b
+		bkcolor ##ownerbarbkgrndhi
+		color ##ownerbartexthi
+	/li
+		fontsize 13
+		liststyle none
+		padding l:10 r:5
+	/h1,h2,li
+		color ##ownerbartext
+		margin lr:5
+		margin tb:2
+		font verdana
+		fontsize 15
+

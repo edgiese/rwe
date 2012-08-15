@@ -1,0 +1,88 @@
+; arial-georgia text palette
+; default colors
+##arigeorbak=ffffff
+##arigeordiv=eeeeee
+##arigeorcell=eeeeee
+##arigeorcellhdr=e0e0e0
+##arigeordefbak=dddddd
+##arigeorlinkcolor=000088
+##arigeorhdrmargin=15
+##arigeortxtmargin=20
+##arigeorbulletmargin=37
+##arigeortextcolor=000000
+##arigeorimgbordercolor=ffffff
+
+; .essay
+	/h1
+		fontsize 23
+	/h2
+		fontsize 23
+		padding t:12 b:0
+	/h3	
+		fontsize 20
+		padding t:12 b:0
+	/h4
+		padding t:12 b:0
+		fontsize 16
+		fontattribs b
+	/h5
+		justify c
+		fontsize 11
+	/h1,h2,h3,h4,h5
+		margin lr:##arigeorhdrmargin
+		font arial
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0			
+	/table
+		margin t:8 lr:##arigeortxtmargin
+	/td,th
+		border tlrb:##arigeorbak|3
+		padding tb:2 lr:4
+	/td
+		bkcolor ##arigeorcell
+	/th
+		fontattribs b
+		bkcolor ##arigeorcellhdr		
+	/dt
+		font arial
+		letterspacing 3
+		fontsize 24
+		justify c
+	/img
+		border tlrb:##arigeorimgbordercolor|2
+		margin tlrb:0
+		padding tlrb:0	
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i
+	/blockquote			
+		bkcolor ##arigeordiv
+		padding tb:6
+	/blockquote,dl
+		margin t:8 lr:30
+		padding t:0 lrb:6
+		bkcolor ##arigeordefbak
+	/li
+		margin lr:##arigeorbulletmargin
+	/p,th,td,li,blockquote
+		margin lr:##arigeortxtmargin
+		font georgia
+		fontsize 14
+	/p
+		margin t:6		
+	/div div
+		bkcolor ##arigeordiv
+		width 220
+		padding lrb:15
+		position R
+		margin lr:##arigeortxtmargin
+	/hr
+		clear both
+		hide 1			
+	/a
+		color ##arigeorlinkcolor
+		border b:##arigeorlinkcolor|1|dashed

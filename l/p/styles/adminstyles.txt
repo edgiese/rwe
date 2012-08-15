@@ -1,0 +1,183 @@
+; basic styles for admin pages
+
+; these are defaults.  if including file overrides them, they will be ignored
+##adminpagebk=ff0000
+##admintitlebk=00ff00
+##admincontentsbk=0000ff
+##admincell=ffff00
+##admintext=000000
+##admintitlecolor=ffffff
+##adminlogowidth=200
+##adminlogoheight=100
+
++authorizations
++images
++files
++form/loginform/collecting,form/loginform/securityquestion,form/loginform/updatepassword,form/loginform/register
+!form@admin
+#body_body/body
+		padding lrtb:10
+		margin lrtb:0 
+#div_adminpage/div
+		bkcolor ##adminpagebk
+		position N
+		width 980
+		margin lrtb:0
+#div_title/div
+		position N
+		width 100%
+		margin l:##adminlogowidth r:0
+		minheight ##adminlogoheight
+		bkcolor ##admintitlebk
+#div_content/div
+		position N
+#emptyrect_homelink/div
+		position D 0|0
+		height ##adminlogoheight
+		width ##adminlogowidth
+		bkcolor transparent
+
+; admin styles are in a world all their own--no falling into defaults
+@admin
+.adminlogo/object,div,img
+		position D 10|10 ; matches padding of body
+		
+.admincontent/div
+		margin lrtb:0
+		padding lrtb:20
+		bkcolor ##admincontentsbk		
+
+.+imageformtable
+	/td
+		width 25%
+		padding lr:5
+		verticalalign top
+
+.+auth_screendoorerror/p
+		bkcolor ffed23
+		border tlrb:f85c33|1
+		padding tlrb:2
+		font:arial_narrow
+		fontsize 14
+		margin b:3
+		justify c
+		
+.+auth_individual_form
+	/td
+		padding tb:5 lr:25
+		bkcolor ##admincell
+		verticalalign bottom
+				
+.auth_individual
+	/th
+		fontattribs b	
+	/td,th
+		bkcolor ##admincell
+		padding tb:3 rl:8
+		border tlrb:##admincontentsbk|2
+		color 000000
+		font verdana
+		fontsize 13 
+.admintitle
+	/h3
+		font trebuchet
+		fontsize 26
+		padding l:20 t:30
+		color ##admintitlecolor
+		
+.+visitorrequesterror/p
+		bkcolor ffed23
+		border tlrb:f85c33|1
+		padding tlrb:2
+		font:arial_narrow
+		fontsize 14
+		margin b:3
+		justify c
+
+
+.essay,imagemanagement
+	/div
+		padding lr:25
+	/h1
+		font arial_black
+		color ##admintitlecolor
+		fontsize 28
+		padding tb:8
+		margin tb:15
+	/h2
+		justify c
+	/h2,h3,h2 a,h3 a
+		color ##admintext
+		fontsize 20
+		padding t:12 b:0
+	/h4,h5	
+		padding t:12 b:0
+	/h4,h4 a
+		color ##admintext
+		fontsize 16
+		fontattribs b
+	/h5,h5 a
+		color ##admintext
+		fontsize 16
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0		
+	/table
+		margin t:8
+	/td,th
+		border tlrb:##admincontentsbk|3
+		bkcolor ##admincell
+		padding lrtb:4
+	/dt
+		font impact
+		letterspacing 3
+		fontsize 24
+		justify c
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i		
+	/blockquote,dl
+		margin t:8 lr:12
+		padding t:0 lrb:6
+		bkcolor ##admintitle
+	/div div
+		bkcolor ##admincell
+		width 220
+		padding lrb:15		
+
+.edit,dropdown,listbox/input,textarea,select
+		bkcolor ffffff
+		border tlrb:777777|1
+		margin br:5
+	/input,textarea
+		padding lrtb:2
+
+.button/input
+		margin t:5
+		border tl:ffffff|2
+		border br:bbbbbb|2
+		bkcolor dddddd
+
+.radio,checkbox/input
+		margin r:5 t:7
+
+.form
+	/form
+		font verdana
+		fontsize 13
+		margin tb:20
+	/h1
+		font verdana
+		fontsize 19	
+		
+	/fieldset
+		padding lrbt:10
+		bkcolor transparent
+		border lrtb:000000|1
+	/legend
+		bkcolor transparent
+		padding tlrb:2
+		

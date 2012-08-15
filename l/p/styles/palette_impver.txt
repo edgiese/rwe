@@ -1,0 +1,92 @@
+; impact-verdana text palette
+; default colors
+##impverbak=ffffff
+##impverdiv=eeeeee
+##impvercell=eeeeee
+##impvercellhdr=e0e0e0
+##impverloudbak=ffaaaa
+##impverlinkcolor=000088
+##impverhdrmargin=15
+##impvertxtmargin=20
+##impverbulletmargin=37
+##impvertextcolor=000000
+
+; .essay
+	/h1
+		fontsize 23
+		letterspacing 3
+	/h2
+		fontsize 23
+		padding t:12 b:0
+		letterspacing 3
+	/h3	
+		fontsize 20
+		padding t:12 b:0
+		letterspacing 3
+	/h4
+		padding t:12 b:0
+		fontsize 16
+		fontattribs b
+		letterspacing 2
+	/h5
+		justify c
+		fontsize 11
+		letterspacing 1
+	/h1,h2,h3,h4,h5
+		margin lr:##impverhdrmargin
+		font impact
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0			
+	/table
+		margin t:8 lr:##impvertxtmargin
+	/td,th
+		border tlrb:##impverbak|3
+		padding tb:2 lr:4
+	/td
+		bkcolor ##impvercell
+	/th
+		fontattribs b
+		bkcolor ##impvercellhdr		
+	/dt
+		font impact
+		letterspacing 3
+		fontsize 24
+		justify c
+	/img
+		border tlrb:ffffff|2
+		margin tlrb:0
+		padding tlrb:0	
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i
+	/blockquote			
+		bkcolor ##impverdiv
+		padding tb:6
+	/blockquote,dl
+		margin t:8 lr:30
+		padding t:0 lrb:6
+		bkcolor ##impverloudbak
+	/li
+		margin lr:##impverbulletmargin
+	/p,th,td,li,blockquote
+		margin lr:##impvertxtmargin
+		font verdana
+		fontsize 14
+	/p
+		margin t:6		
+	/div div
+		bkcolor ##impverdiv
+		width 220
+		padding lrb:15
+		position R
+		margin lr:##impvertxtmargin
+	/hr
+		clear both
+		hide 1			
+	/a
+		color ##impverlinkcolor
+		border b:##impverlinkcolor|1|dashed

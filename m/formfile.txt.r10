@@ -1,0 +1,11 @@
+email:  sent message: A user has made a request for your action on the web site.
+Request type: info
+See the web site for more details.
+Name: Edward Giese
+Email address: edgiese@gmail.com
+(830) 997-5031
+inquiry: I need help
+type: party
+ 
+form:  form processed, redirecting to /dev/kcaf/form/k2/finished/12 
+function.mail</a>]: Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\dev\dev\c\au\au_visitorrequest.php on line 635

@@ -1,0 +1,31 @@
+!requests@admin
+#body_body/body
+		padding lrtb:10
+		margin lrtb:0 
+#div_adminpage/div
+		bkcolor ##adminpagebk
+		position N
+		width 980
+		margin lrtb:0
+#div_title/div
+		position N
+		width 100%
+		margin l:##adminlogowidth r:0
+		minheight ##adminlogoheight
+		bkcolor ##admintitlebk
+#div_content/div
+		position N
+#emptyrect_homelink/div
+		position D 0|0
+		height ##adminlogoheight
+		width ##adminlogowidth
+		bkcolor transparent
+
+#visitorrequestdata_form
+	/td,th
+		bkcolor ##admincell
+		border lrtb:##adminpagebk|3
+		%8:border lrtb:#000000|1
+		%15:padding lrtb:4
+	/th
+		fontattribs b

@@ -1,0 +1,88 @@
+; trebuchet-verdana text palette
+; default colors
+##trebverbak=ffffff
+##trebverdiv=eeeeee
+##trebvercell=eeeeee
+##trebvercellhdr=e0e0e0
+##trebverloudbak=ffaaaa
+##trebverlinkcolor=000088
+##trebverhdrmargin=15
+##trebvertxtmargin=20
+##trebverbulletmargin=37
+##trebvertextcolor=000000
+##trebverimgborder=ffffff
+
+; .essay
+	/h1
+		fontsize 23
+	/h2
+		fontsize 23
+		padding t:12 b:0
+	/h3	
+		fontsize 20
+		padding t:12 b:0
+	/h4
+		padding t:12 b:0
+		fontsize 16
+		fontattribs b
+	/h5
+		justify c
+		fontsize 11
+	/h1,h2,h3,h4,h5
+		margin lr:##trebverhdrmargin
+		font trebuchet
+	/h6 ; captions
+		fontsize 12
+		justify c
+		padding t:0 b:3
+		margin t:0			
+	/table
+		margin t:8 lr:##trebvertxtmargin
+	/td,th
+		border tlrb:##trebverbak|3
+		padding tb:4 lr:6
+	/td
+		bkcolor ##trebvercell
+	/th
+		fontattribs b
+		bkcolor ##trebvercellhdr		
+	/dt
+		font impact
+		letterspacing 3
+		fontsize 24
+		justify c
+	/img
+		border tlrb:##trebverimgborder|2
+		margin tlrb:0
+		padding tlrb:0	
+	/dd
+		fontsize 18
+		justify c
+		fontattribs i
+	/blockquote			
+		bkcolor ##trebverdiv
+		padding tb:6
+	/blockquote,dl
+		margin t:8 lr:30
+		padding t:0 lrb:6
+		bkcolor ##trebverloudbak
+	/li
+		margin lr:##trebverbulletmargin
+	/p,th,td,li,blockquote
+		margin lr:##trebvertxtmargin
+		font verdana
+		fontsize 12
+	/p
+		margin t:14		
+	/div div
+		bkcolor ##trebverdiv
+		width 220
+		padding lrb:15
+		position R
+		margin lr:##trebvertxtmargin
+	/hr
+		clear both
+		hide 1			
+	/a
+		color ##trebverlinkcolor
+		border b:##trebverlinkcolor|1|dashed

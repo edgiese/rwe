@@ -1,0 +1,40 @@
+@verdana ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; a clean verdanna-based palette
+
+;;;;;; forms
+; usage equivalences allow these keywords to override form defaults:
+$edit=form
+$dropdown=form
+$listbox=form
+
+.edit,dropdown,listbox/input,textarea,select
+		bkcolor eeeeee
+		border tlrb:777777|1
+		margin br:5
+	/input,textarea
+		padding lrtb:2
+
+.button/input
+		margin t:5
+		border tl:ffffff|2
+		border br:bbbbbb|2
+		bkcolor dddddd
+
+.radio,checkbox/input
+		margin r:5 t:7
+
+.form
+	/form
+		font verdana
+		fontsize 13
+		margin tb:20
+	/h1
+		font verdana
+		fontsize 19	
+		
+	/fieldset
+		padding lrbt:10
+		bkcolor ##fieldset
+		border lrtb:000000|1
+	/legend
+		bkcolor ##legend
+		padding tlrb:2
