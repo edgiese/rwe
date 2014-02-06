@@ -159,7 +159,7 @@ public function watcherAjax($watcherid,$requesturi,$xnum,$pageextra) {
 		$this->ed=$this->initEditBlock($state,$aushort,$eblk,$requesturi);
 	}
 
-	$this->doWatcher(&$this->ed,$id,$aushort,$xnum,False,$pageextra);
+	$this->doWatcher($this->ed,$id,$aushort,$xnum,False,$pageextra);
 	
 	// we're possibly saving to a foreign state.
 	if ($state->getStateCookie() != $qqs->getStateCookie()) {
@@ -169,7 +169,7 @@ public function watcherAjax($watcherid,$requesturi,$xnum,$pageextra) {
 		$qqs->saveEditData($aushort,$this->ed);
 }
 
-private function doWatcher($ed,$id,$aushort,$xnum,$bModal,$pageextra) {	
+private function doWatcher(&$ed,$id,$aushort,$xnum,$bModal,$pageextra) {	
 	global $qqu,$qq,$qqp,$qqi,$qqj,$qqy,$qqs;
 		
 	if ($bModal) {
@@ -397,14 +397,14 @@ public function editorAjax($au,$aushort,$updatedata,$xnum,$wxnum,$pageextra) {
 		echo "fg.edit.xnum=$xnum;";
 		if (isset($ed['watchers'][1])) {
 			// there is a modal watcher.  don't make it do a separate request for watch data
-			$this->doWatcher(&$ed,1,$aushort,$wxnum,True,$pageextra);	
+			$this->doWatcher($ed,1,$aushort,$wxnum,True,$pageextra);	
 		}
 	} else if ($xnum == 0) {
 		// absolute update
 		$ed['currentval']=$eblk->applyAbsoluteChange($updatedata);
 		if (isset($ed['watchers'][1])) {
 			// there is a modal watcher.  don't make it do a separate request for watch data
-			$this->doWatcher(&$ed,1,$aushort,$wxnum,'parent.modalwatch.fg.edit',$pageextra);	
+			$this->doWatcher($ed,1,$aushort,$wxnum,'parent.modalwatch.fg.edit',$pageextra);	
 		}
 		echo 'fg.edit.xnum=1;';
 		$ed['xnum']=0;

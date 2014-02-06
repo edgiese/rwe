@@ -136,7 +136,7 @@ class crudquery {
 			$this->stmt=Null;		
 	}
 	
-	private function addSimpleArg($args,$argoffset,$exeArgs,$name,$type) {
+	private function addSimpleArg($args,&$argoffset,&$exeArgs,$name,$type) {
 		if (isset($exeArgs[$name]))
 			throw new exception("Duplicated argument ($name) passed to query {$this->module}::{$this->name}");
 		if ($argoffset < 0) {
@@ -194,7 +194,7 @@ class crudquery {
 		$exeArgs[$name]=$newarg;
 	}
 	
-	private function addObjArg($args,$argoffset,$exeArgs,$name,$list) {
+	private function addObjArg($args,&$argoffset,&$exeArgs,$name,$list) {
 		$prefix=$name."_";
 		$ix=0;
 		foreach ($list as $arg) {
@@ -221,15 +221,15 @@ class crudquery {
 				++$ix;	
 				$name=$prefix.$ix;
 				if (is_int($arg)) {
-					$this->addSimpleArg($myargs,&$myargoffset,&$exeArgs,$name,$arg);
+					$this->addSimpleArg($myargs,$myargoffset,$exeArgs,$name,$arg);
 				} else {
-					$this->addObjArg($myargs,&$myargoffset,&$exeArgs,$name,$arg);				
+					$this->addObjArg($myargs,$myargoffset,$exeArgs,$name,$arg);				
 				}
 			} // if ordinary type list entry	
 		}
 	}
 	
-	private function getData($qdata,$qdix,$name,$type) {
+	private function getData($qdata,&$qdix,$name,$type) {
 		if (is_int($type)) {
 			// simple value.  return it.
 			if ($qdix > sizeof($qdata)-1) {
@@ -268,7 +268,7 @@ class crudquery {
 			$nFields=$newval->getParamCount();
 			$params=array();
 			for ($i=0; $i<$nFields; ++$i)
-				$params[$i]=$this->getData($qdata,&$qdix,$name,$type[1+$i]);
+				$params[$i]=$this->getData($qdata,$qdix,$name,$type[1+$i]);
 			$newval->setDataArray($params);	
 		}
 		return $newval;
@@ -291,10 +291,10 @@ class crudquery {
 		foreach ($this->args as $arg) {
 			if (is_int($arg[1])) {
 				// this is a simple argument
-				$this->addSimpleArg($args,&$argoffset,&$exeArgs,$arg[0],$arg[1]);
+				$this->addSimpleArg($args,$argoffset,$exeArgs,$arg[0],$arg[1]);
 			} else {
 				// this is an object argument
-				$this->addObjArg($args,&$argoffset,&$exeArgs,$arg[0],$arg[1]);
+				$this->addObjArg($args,$argoffset,$exeArgs,$arg[0],$arg[1]);
 			}
 		}
 		
@@ -326,7 +326,7 @@ class crudquery {
 					$newrow=array();		
 				foreach ($this->vals as $val) {
 					$name=$val[0];
-					$newval=$this->getData($qdata,&$qdix,$name,$val[1]);
+					$newval=$this->getData($qdata,$qdix,$name,$val[1]);
 					if ($bOutputCols) {
 						$retval[$name][]=$newval;
 					} else

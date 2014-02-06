@@ -108,7 +108,7 @@ public function getOutputString($prodid) {
 	
 	$template=$qqu->getEditText($this->tid);
 	$classes=array();
-	if (0 <strlen($message=$qqu->addClasses(&$classes,$this->classInit)))
+	if (0 <strlen($message=$qqu->addClasses($classes,$this->classInit)))
 		throw new exception("parsing error in class init for {$this->longname}: $message");
 		
 	// perform product based substitutions

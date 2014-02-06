@@ -184,7 +184,7 @@ public function getTextRegistrationTags() {return "div:p,a,span,span a,h1 a,h2 a
 static $automapid=1;	// used to autogenerate image map ids for link
 
 // helper function for creole2html() function below
-private function parseOneLine($line,&$codes,$bForceClose,$callbacks,$classes) {
+private function parseOneLine($line,&$codes,$bForceClose,&$callbacks,&$classes) {
 	global $qqi,$qq;
 	
 	$o="";
@@ -548,7 +548,7 @@ private function checkRange($line,$ixbar,$offset,$startcode,$endcode) {
 }
 
 // returns an error string ready to be appended to output
-public function addClasses($classes,$classAddString) {
+public function addClasses(&$classes,$classAddString) {
 	if ($classAddString == '')
 		return '';
 	$classdata=explode(';',$classAddString);
@@ -707,8 +707,8 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 				$term=substr($line,2);
 				$def="";
 			}
-			$o .= $this->startHTML('dt',$classes).$this->parseOneLine($term,$closeFormatCodes,True,&$callbacks,&$classes)."</dt>";
-			$o .= $this->startHTML('dd',$classes).$this->parseOneLine($def,$closeFormatCodes,True,&$callbacks,&$classes)."</dd>";
+			$o .= $this->startHTML('dt',$classes).$this->parseOneLine($term,$closeFormatCodes,True,$callbacks,$classes)."</dt>";
+			$o .= $this->startHTML('dd',$classes).$this->parseOneLine($def,$closeFormatCodes,True,$callbacks,$classes)."</dd>";
 			continue;				
 		} else if ($first == "#" || $first == "*") {
 			// ordered and unordered lists can be treated the same--just different codes
@@ -731,7 +731,7 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 			}
 			// a single space after a list marker is ignored
 			$spaceoffset= (substr($line,$nestingLevel,1) == " ") ? 1 : 0;	
-			$o .= $this->startHTML('li',$classes).$this->parseOneLine(substr($line,$nestingLevel+$spaceoffset),$closeFormatCodes,True,&$callbacks,&$classes)."</li>";
+			$o .= $this->startHTML('li',$classes).$this->parseOneLine(substr($line,$nestingLevel+$spaceoffset),$closeFormatCodes,True,$callbacks,$classes)."</li>";
 			continue;
 		}
 		if ($first2 == '++') {
@@ -739,7 +739,7 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 			if (False !== ($i=strpos($line,'!')))
 				$line=substr($line,0,$i);
 			$line=trim(substr($line,2));
-			$o .= $this->addClasses(&$classes,$line);				
+			$o .= $this->addClasses($classes,$line);				
 			continue;
 		} // if a style add marker
 		if ($first2 == '+-') {
@@ -789,7 +789,7 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 				$aclose='</a>';
 			} else
 				$aopen=$aclose='';	
-			$o .= $this->startHTML("h$level",$classes).$aopen.$this->parseOneLine($line,$closeFormatCodes,True,&$callbacks,&$classes)."$aclose</h{$level}>";
+			$o .= $this->startHTML("h$level",$classes).$aopen.$this->parseOneLine($line,$closeFormatCodes,True,$callbacks,$classes)."$aclose</h{$level}>";
 			continue;
 		}
 		if ($first == '|') {
@@ -876,7 +876,7 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 				if ($rowspan > 1)
 					$o .= " rowspan=\"{$rowspan}\"";
 				// make certain table cell contents are not blank	
-				$cell=$this->parseOneLine($cell,$closeFormatCodes,True,&$callbacks,&$classes);
+				$cell=$this->parseOneLine($cell,$closeFormatCodes,True,$callbacks,$classes);
 				if ($cell == "")
 					$cell="&nbsp;";
 				$o .= ">{$cell}</{$keyword}>";
@@ -892,7 +892,7 @@ function creole2html($creole,$callbacks=array(),$classes=array()) {
 			$o .= ' ';		// line break always implies at least one space	
 		if ($closeBlockCode != '</p>')
 			throw new exception("Inernal error:  close block code mismatch in paragraph");
-		$o .= $this->parseOneLine($line,$closeFormatCodes,False,&$callbacks,&$classes);		
+		$o .= $this->parseOneLine($line,$closeFormatCodes,False,$callbacks,$classes);		
 	} // loop for all lines
 	// clean up
 	while (($code=array_pop($closeFormatCodes)) != NULL)

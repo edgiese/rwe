@@ -140,7 +140,7 @@ public function outputWithData($pgen,$brotherid,$outputdata) {
 	global $qqu,$qqi;
 
 	$classes=array();
-	if (0 <strlen($message=$qqu->addClasses(&$classes,$this->classInit)))
+	if (0 <strlen($message=$qqu->addClasses($classes,$this->classInit)))
 		throw new exception("parsing error in class init for {$this->longname}: $message");
 
 	$cbdata=array($pgen,$brotherid);

@@ -188,7 +188,7 @@ function __construct($tag,$parent,$initstring,$state="",$data=0) {
 	} // loop for all extra data fields
 }
 
-private function setupFormData($ctrl,$tag,$formdata,$default='') {
+private function setupFormData($ctrl,$tag,&$formdata,$default='') {
 	global $qqi;
 	
 	if (isset($formdata[$tag]))
@@ -222,16 +222,16 @@ private function makeform($bDraw=False,$formdata=array()) {
 	
 	// add personal information
 	$form->addControl('d',$ctrl=new ll_edit($form,"name",28,40,'',False));
-	$this->setupFormData($ctrl,'name',&$formdata);
+	$this->setupFormData($ctrl,'name',$formdata);
 	$f .= $w ? "<tr><td$cstr>* Your name:</td><td$cstr>{$formdata['*name']}<<name>></td></tr>" : "* Your Name:<br />{$formdata['*name']}<<name>><br />";
 	if ($this->email != self::EMAIL_NONE) {
 		$form->addControl('d',$ctrl=new ll_edit($form,"email",28,40,'',False));
-		$this->setupFormData($ctrl,'email',&$formdata);
+		$this->setupFormData($ctrl,'email',$formdata);
 		$asterisk= $this->required['email'] ? '* ' : '';
 		$f .= $w ? "<tr><td$cstr>{$asterisk}Email Address:</td><td$cstr>{$formdata['*email']}<<email>>" : "{$asterisk}Email Address:<br />{$formdata['*email']}<<email>><br />";
 		if ($this->email == self::EMAIL_VERIFIED) {
 			$form->addControl('d',$ctrl=new ll_edit($form,"email2",28,40,'',False));
-			$this->setupFormData($ctrl,'email2',&$formdata);
+			$this->setupFormData($ctrl,'email2',$formdata);
 			$f .= "{$asterisk}Verify email:<br />{$formdata['*email2']}<<email2>>";
 		}
 		$f .= $w ? '</td></tr>' : '<br />';
@@ -241,20 +241,20 @@ private function makeform($bDraw=False,$formdata=array()) {
 		$f .= $w ? "<tr><td$cstr>{$asterisk}</td><td$cstr>" : "{$asterisk}<br />";
 		if ($this->mail == self::ADDRESS_USA) {
 			$form->addControl('d',$ctrl=new ll_edit($form,"line1",28,40,'',False));
-			$this->setupFormData($ctrl,'line1',&$formdata);
+			$this->setupFormData($ctrl,'line1',$formdata);
 			$form->addControl('d',$ctrl=new ll_edit($form,"line2",28,40,'',False));
-			$this->setupFormData($ctrl,'line2',&$formdata);
+			$this->setupFormData($ctrl,'line2',$formdata);
 			$form->addControl('d',$ctrl=new ll_edit($form,"city",13,40,'',False));
-			$this->setupFormData($ctrl,'city',&$formdata);
+			$this->setupFormData($ctrl,'city',$formdata);
 			$dd=new ll_dropdown($form,'state2');
 			if ($this->bWide)
 				$dd->setOptionArray(data_address::getStates(True));
 			else
 				$dd->setOptionDisplayVal(data_address::getStates(False));
 			$form->addControl('d',$dd);
-			$this->setupFormData($dd,'state2',&$formdata);
+			$this->setupFormData($dd,'state2',$formdata);
 			$form->addControl('d',$ctrl=new ll_edit($form,"zip",10,10,'',False));
-			$this->setupFormData($ctrl,'zip',&$formdata);
+			$this->setupFormData($ctrl,'zip',$formdata);
 			
 			$f .= "{$formdata['*line1']}<<line1>><br />{$formdata['*line2']}<<line2>><br />{$formdata['*city']}{$formdata['*state2']}{$formdata['*zip']}<table{$cstr}><tr><td$cstr>City</td><td$cstr>State</td><td$cstr>ZIP</td></tr><tr><td$cstr><<city>></td><td$cstr><<state2>></td><td$cstr><<zip>></td></tr></table>";
 			$form->setExtraValue('country','USA');
@@ -268,7 +268,7 @@ private function makeform($bDraw=False,$formdata=array()) {
 		$extra = ($i == 0) ? '' : 'Alternate ';
 		$asterisk= ($this->required['telephone'] > $i) ? '* ' : '';
 		$form->addControl('d',$ctrl=new ll_edit($form,"phone{$i}",11,15,'',False));
-		$this->setupFormData($ctrl,"phone{$i}",&$formdata);
+		$this->setupFormData($ctrl,"phone{$i}",$formdata);
 		$phonemsg=$formdata["*phone{$i}"];
 		$f .= $w ? "<tr><td$cstr>{$asterisk}{$extra}Telephone:</td><td$cstr>$phonemsg<<phone{$i}>>" : "{$asterisk}{$extra}Telephone:<br />$phonemsg<<phone{$i}>>";
 		if ($this->bGetTelephoneType) {
@@ -278,7 +278,7 @@ private function makeform($bDraw=False,$formdata=array()) {
 			$rg->addOption('work','Work');
 			$rg->addOption('cell','Cell');
 			$form->addControl('d',$rg);
-			$this->setupFormData($rg,"type{$i}",&$formdata);
+			$this->setupFormData($rg,"type{$i}",$formdata);
 		}	
 		$f .= $w ? '</td></tr>' : '<br />';
 	}
@@ -321,7 +321,7 @@ private function makeform($bDraw=False,$formdata=array()) {
 				$form->addControl('d',$ctrl=new ll_edit($form,$ftag,$data[0],$data[1]));
 				if ($bInitDefaults)
 					$ctrl->setValue($data[3]);
-				$this->setupFormData($ctrl,$ftag,&$formdata);
+				$this->setupFormData($ctrl,$ftag,$formdata);
 				$extramsg=$formdata["*$ftag"];
 				$f .= $w ? "<tr><td$cstr>$asterisk{$data[2]}</td><td$cstr>$extramsg<<$ftag>></td><tr>" : "$asterisk{$data[2]}<br />$extramsg<<$ftag>><br />";
 			break;
@@ -332,7 +332,7 @@ private function makeform($bDraw=False,$formdata=array()) {
 				$form->addControl('d',$ta=new ll_textarea($form,$ftag,$data[0],$data[1]));
 				if ($bInitDefaults)
 					$ta->setValue($data[3]);
-				$this->setupFormData($ta,$ftag,&$formdata);
+				$this->setupFormData($ta,$ftag,$formdata);
 				$extramsg=$formdata["*$ftag"];
 				$f .= $w ? "<tr><td$cstr>$asterisk{$data[2]}</td><td$cstr>$extramsg<<$ftag>></td><tr>" : "$asterisk{$data[2]}<br />$extramsg<<$ftag>><br />";
 			break;
@@ -344,14 +344,14 @@ private function makeform($bDraw=False,$formdata=array()) {
 				$dd=new ll_dropdown($form,"{$ftag}_type");
 				$dd->setOptionArray(data_cc::getTypes());
 				$form->addControl('d',$dd);
-				$this->setupFormData($dd,"{$ftag}_type",&$formdata);
+				$this->setupFormData($dd,"{$ftag}_type",$formdata);
 				$extramsg=$formdata["*{$ftag}_type"];
 				$f .= $w ? "<tr><td$cstr>{$asterisk}Credit Card Type</td><td$cstr>$extramsg<<{$ftag}_type>></td><tr>" : "{$asterisk}Credit Card Type<br />$extramsg<<{$ftag}_type>><br />";
 				
 				// credit card number:
 				$ctrl=new ll_edit($form,"{$ftag}_number",22,22);
 				$form->addControl('d',$ctrl);
-				$this->setupFormData($ctrl,"{$ftag}_number",&$formdata);
+				$this->setupFormData($ctrl,"{$ftag}_number",$formdata);
 				$extramsg=$formdata["*{$ftag}_number"];
 				$f .= $w ? "<tr><td$cstr>{$asterisk}Credit Card Number</td><td$cstr>$extramsg<<{$ftag}_number>></td><tr>" : "{$asterisk}Credit Card Number<br />$extramsg<<{$ftag}_number>><br />";
 				
@@ -359,7 +359,7 @@ private function makeform($bDraw=False,$formdata=array()) {
 				if (data_cc::useCv2()) {
 					$ctrl=new ll_edit($form,"{$ftag}_cv2",4,4);
 					$form->addControl('d',$ctrl);
-					$this->setupFormData($ctrl,"{$ftag}_cv2",&$formdata);
+					$this->setupFormData($ctrl,"{$ftag}_cv2",$formdata);
 					$extramsg=$formdata["*{$ftag}_cv2"];
 					$cv2string1=" and CV2 code (back of card)";
 					$cv2string2="&nbsp&nbsp;CV2: <<{$ftag}_cv2>>";
@@ -370,14 +370,14 @@ private function makeform($bDraw=False,$formdata=array()) {
 				// expiration date:
 				$ctrl=new ll_edit($form,"{$ftag}_exp",5,5);
 				$form->addControl('d',$ctrl);
-				$this->setupFormData($ctrl,"{$ftag}_exp",&$formdata);
+				$this->setupFormData($ctrl,"{$ftag}_exp",$formdata);
 				$extramsg .= $formdata["*{$ftag}_exp"];
 				$f .= $w ? "<tr><td$cstr>{$asterisk}Expiration date (mm/yy)$cv2string1</td><td$cstr>$extramsg<<{$ftag}_exp>>{$cv2string2}</td><tr>" : "{$asterisk}Expiration date (mm/yy){$cv2string1}<br />$extramsg<<{$ftag}_exp>>{$cv2string2}<br />";
 				
 				// name on card:
 				$ctrl=new ll_edit($form,"{$ftag}_name",28,28);
 				$form->addControl('d',$ctrl);
-				$this->setupFormData($ctrl,"{$ftag}_name",&$formdata);
+				$this->setupFormData($ctrl,"{$ftag}_name",$formdata);
 				$extramsg=$formdata["*{$ftag}_name"];
 				$f .= $w ? "<tr><td$cstr>{$asterisk}Name on Card</td><td$cstr>$extramsg<<{$ftag}_name>></td><tr>" : "{$asterisk}Name on Card<br />$extramsg<<{$ftag}_name>><br />";
 			break;

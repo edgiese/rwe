@@ -197,7 +197,7 @@ public function cmpjs($a,$b) {
 }
 
 // converts a snippet to code.  returns code.  outside this file, leave off all but first two args
-public function snippetToCode($sname,$args,$page='',$objshort='',$libs=Null,$extrasnips=Null,$destination='') {
+public function snippetToCode($sname,$args,$page='',$objshort='',&$libs=Null,&$extrasnips=Null,$destination='') {
 	global $qq,$qqi;
 
 	// look for a filename in the snippet
@@ -280,7 +280,7 @@ public function snippetToCode($sname,$args,$page='',$objshort='',$libs=Null,$ext
 				// snippet dependency.  work through recursively, that is, if we're watching for extrasnips:
 				if (!is_array($extrasnips))
 					continue;
-				if (0 == preg_match("/^(\\*|\\:|\\/|\\!)([^ ]*) ([^ ]+)/", $data, &$matches))
+				if (0 == preg_match("/^(\\*|\\:|\\/|\\!)([^ ]*) ([^ ]+)/", $data, $matches))
 					throw new exception("illegal syntax for snippet dependency.  snippet: $sname  line: $line");
 				list($dummy,$subtype,$routine,$subsnippet)=$matches;
 				if ($subtype == '*' || $subtype == ':') {
@@ -300,7 +300,7 @@ public function snippetToCode($sname,$args,$page='',$objshort='',$libs=Null,$ext
 					$subdestination=$destination;
 					$codestart=$codeend='';
 				}
-				$code=$this->snippetToCode($subsnippet,$args,$page,$objshort,&$libs,&$extrasnips,$subdestination);
+				$code=$this->snippetToCode($subsnippet,$args,$page,$objshort,$libs,$extrasnips,$subdestination);
 				$extrasnips[]=array($subdestination,$codestart.$code.$codeend,'*code*');
 			} else if ($type == "<") {
 				// library dependency
@@ -353,7 +353,7 @@ public function snippetToCode($sname,$args,$page='',$objshort='',$libs=Null,$ext
 			// NOTE:  here is where you can strip comments, etc.
 			$line=str_replace($search,$params,$line);
 			// any long names that are left need to be converted to short names.  they are marked with <# longname #>
-			preg_match_all("/<#([^#]+)#>/", $line, &$matches);
+			preg_match_all("/<#([^#]+)#>/", $line, $matches);
 			$longnames=array_unique($matches[1]);
 			$srch=array();
 			$replace=array();
@@ -365,7 +365,7 @@ public function snippetToCode($sname,$args,$page='',$objshort='',$libs=Null,$ext
 			$line=str_replace($srch,$replace,$line);
 			
 			// any tags that are left need to be appended to the main name to short names.  they are marked with <! tag !>
-			preg_match_all("/<!([^!]+)!>/", $line, &$matches);
+			preg_match_all("/<!([^!]+)!>/", $line, $matches);
 			$tags=array_unique($matches[1]);
 			$srch=array();
 			$replace=array();
@@ -436,7 +436,7 @@ private function buildjs($jsinfo,$page) {
 			$codestart=$codeend=$objshort='';		// code is bare, as is
 		
 		if ($args != '*code*') {
-			$code=$this->snippetToCode($snippet,$args,$page,$objshort,&$libs,&$extrasnips,$destination);
+			$code=$this->snippetToCode($snippet,$args,$page,$objshort,$libs,$extrasnips,$destination);
 			// translate in snippet
 			$jsinfo[$ix][2]="*code*";
 			$jsinfo[$ix][1]=($codestart == '*discard*') ? '' : $codestart.$code.$codeend;	

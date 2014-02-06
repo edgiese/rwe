@@ -23,7 +23,7 @@ private function getSecurityQuestions() {
 }
 
 // this function facilitates error messages in the form
-private function setupFormData($ctrl,$tag,$formdata,$default='') {
+private function setupFormData($ctrl,$tag,&$formdata,$default='') {
 	global $qqi;
 	
 	if (isset($formdata[$tag]))
@@ -40,12 +40,12 @@ private function makeform_base($formdata) {
 
 	$f="<h1>Log In</h1><br />";
 	$form->addControl('d',$ctrl=new ll_edit($form,"email",28,40,'',False));
-	$this->setupFormData($ctrl,'email',&$formdata);
+	$this->setupFormData($ctrl,'email',$formdata);
 	$f .= "Login ID (your email):<br />{$formdata['*email']}<<email>><br />";
 
 	$form->addControl('d',new ll_button($form,'forgot','Forgot password'));
 	$form->addControl('d',$ctrl=new ll_edit($form,"password",10,20,'',True));
-	$this->setupFormData($ctrl,'password',&$formdata);
+	$this->setupFormData($ctrl,'password',$formdata);
 	$f .= "Password:<br />{$formdata['*password']}<<password>>&nbsp;&nbsp;<<login>><br />";
 
 	$f .= "<<remember>><br />";
@@ -71,7 +71,7 @@ private function makeform_security($formdata,$question='') {
 	$f="<h1>Answer the security question:</h1><br /><br />$question<br />";
 	
 	$form->addControl('d',$ctrl=new ll_edit($form,"securitya",28,40,'',False));
-	$this->setupFormData($ctrl,'securitya',&$formdata);
+	$this->setupFormData($ctrl,'securitya',$formdata);
 	$form->addControl('d',new ll_button($form,'ok','Answer'));
 	$form->addControl('d',new ll_button($form,'cancel','Cancel'));
 	$f .= "{$formdata['*securitya']}<<securitya>><br /><<ok>>&nbsp;&nbsp;<<cancel>><br />";
@@ -87,11 +87,11 @@ private function makeform_update($formdata) {
 	$f="<h1>Please update your password</h1><br />";
 
 	$form->addControl('d',$ctrl=new ll_edit($form,"password",20,40,'',True));
-	$this->setupFormData($ctrl,'password',&$formdata);
+	$this->setupFormData($ctrl,'password',$formdata);
 	$f .= "Password (6 or more letters and/or numerals):<br />{$formdata['*password']}<<password>><br />";
 	
 	$form->addControl('d',$ctrl=new ll_edit($form,"password2",20,40,'',True));
-	$this->setupFormData($ctrl,'password2',&$formdata);
+	$this->setupFormData($ctrl,'password2',$formdata);
 	$f .= "Confirm Password:<br />{$formdata['*password2']}<<password2>><br />";
 	
 	$f .= '<<update>>&nbsp;&nbsp;<<cancel>><br />';
@@ -107,33 +107,33 @@ private function makeform_register($formdata) {
 
 	$f="<h1>Register</h1><br />";
 	$form->addControl('d',$ctrl=new ll_edit($form,"preapprove",10,10,'',False));
-	$this->setupFormData($ctrl,'preapprove',&$formdata);
+	$this->setupFormData($ctrl,'preapprove',$formdata);
 	$f .= "Registration on this site requires preapproval.  Enter the code you got from us:<br />{$formdata['*preapprove']}<<preapprove>><br />";
 
 	$form->addControl('d',$ctrl=new ll_edit($form,"name",28,40,'',False));
-	$this->setupFormData($ctrl,'name',&$formdata);
+	$this->setupFormData($ctrl,'name',$formdata);
 	$f .= "Your name (e.g., John Smith):<br />{$formdata['*name']}<<name>><br />";
 
 	$form->addControl('d',$ctrl=new ll_edit($form,"email",28,40,'',False));
-	$this->setupFormData($ctrl,'email',&$formdata);
+	$this->setupFormData($ctrl,'email',$formdata);
 	$f .= "Login ID (your email):<br />{$formdata['*email']}<<email>><br />";
 
 	$form->addControl('d',$ctrl=new ll_edit($form,"password",28,40,'',True));
-	$this->setupFormData($ctrl,'password',&$formdata);
+	$this->setupFormData($ctrl,'password',$formdata);
 	$f .= "Password (6 or more letters and/or numerals):<br />{$formdata['*password']}<<password>><br />";
 	
 	$form->addControl('d',$ctrl=new ll_edit($form,"password2",28,40,'',True));
-	$this->setupFormData($ctrl,'password2',&$formdata);
+	$this->setupFormData($ctrl,'password2',$formdata);
 	$f .= "Confirm Password:<br />{$formdata['*password']}<<password2>><br />";
 	
 	$dd=new ll_dropdown($form,'securityq');
 	$dd->setOptionArray($this->getSecurityQuestions());
-	$this->setupFormData($dd,'securityq',&$formdata);
+	$this->setupFormData($dd,'securityq',$formdata);
 	$form->addControl('d',$dd);
 	$f .= "Choose a security question you'll be able to answer but others probably won't:<br />{$formdata['*securityq']}<<securityq>><br />";
 
 	$form->addControl('d',$ctrl=new ll_edit($form,"securitya",20,40,'',False));
-	$this->setupFormData($ctrl,'securitya',&$formdata);
+	$this->setupFormData($ctrl,'securitya',$formdata);
 	$f .= "EXACT answer to your security question:<br />{$formdata['*securitya']}<<securitya>><br />";
 
 	$f .= '<<register>>&nbsp;&nbsp;<<cancel>><br />';

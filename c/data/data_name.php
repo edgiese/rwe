@@ -81,7 +81,7 @@ class data_name implements data_customtype {
 		$this->title=$this->first=$this->middle=$this->last=$this->generation='';
 		$name=trim($name);
 		do {
-			$name=str_replace('  ',' ',$name,&$count);
+			$name=str_replace('  ',' ',$name,$count);
 		} while ($count > 0);
 		$pieces=explode(' ',$name);
 		$ixfirst=0;

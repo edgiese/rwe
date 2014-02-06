@@ -23,7 +23,7 @@ public function output($pgen,$brotherid) {
 
 	$outputdata=message::getMessageInfo($this->message);
 	$classes=array();
-	if (0 <strlen($qqu->addClasses(&$classes,$this->classInit)))
+	if (0 <strlen($qqu->addClasses($classes,$this->classInit)))
 		throw new exception("parsing error in class init for {$this->longname}");
 
 	$cbdata=array($pgen,$brotherid);
