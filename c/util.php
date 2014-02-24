@@ -43,7 +43,7 @@ public function state_save($state,$key,$timeout) {
 	global $qqc;
 	
 	$statestring=serialize($state);
-	$qqc->insert('util::state',$key,$timeout,$statestring);
+	$qqc->insert('util::state',$key,$timeout,$statestring,date('Y-m-d H:i:s',time()+100));
 }
 
 public function state_update($key,$state) {
@@ -51,7 +51,7 @@ public function state_update($key,$state) {
 
 	$statestring=serialize($state);
 	$qqc->act('util::updatestate',$key,$statestring,date('Y-m-d H:i:s'));
-	$qqc->act('util::stateclean');
+	$qqc->act('util::stateclean',date('Y-m-d H:i:s'));
 }
 
 

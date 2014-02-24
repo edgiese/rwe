@@ -43,14 +43,14 @@ function infolog($flag,$string) {
 	global $qq,$qq_fp;
 	if (!$qq_fp)
 		return;
-	if ($qq['traceflags'] == "*" || False !== strpos($flag,$qq['traceflags']))	
+    if ($qq['traceflags'] == "*" || False !== strpos($qq['traceflags'],$flag))
 		fwrite($qq_fp,"$flag:  $string \n");
 }
 
 function infolog_dump($flag,$name,$var) {
 	global $qq;
 	
-	if ($qq['traceflags'] == "*" || False !== strpos($flag,$qq['traceflags'])) {
+	if ($qq['traceflags'] == "*" || False !== strpos($qq['traceflags'],$flag)) {
 		ob_start();
 		var_dump($var);
 		infolog($flag,"dump of $name: ".ob_get_clean());
@@ -58,6 +58,8 @@ function infolog_dump($flag,$name,$var) {
 }
 function dbg($string) {infolog("dbg",$string);}
 function ddbg($var,$name='dump') {infolog_dump('dbg',$name,$var);}
+function pdbg($string) {infolog("proddbg",$string);}
+function pddbg($var,$name='dump') {infolog_dump('proddbg',$name,$var);}
 
 // default settings that projects in production may override:
 date_default_timezone_set('America/Chicago');
@@ -75,7 +77,7 @@ $qq['production']=(False === strpos($_SERVER['DOCUMENT_ROOT'],'dev'));
 if ($qq['production']) {
 	include("p/project.php");
 	$qq['uselongnames']=False;
-	$qq['traceflags']='exception errortrap';
+	$qq['traceflags']='proddbg exception errortrap';
 } else {
 	$qq['srcbase']="/rwe/";
 	// determine project name by looking at uri path

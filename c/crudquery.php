@@ -303,6 +303,8 @@ class crudquery {
 			throw new exception("Too many arguments ($argoffset) passed to query {$this->module}::{$this->name}");
 
 		// now do the query.  there may be data or not.
+        //ddbg($this->query,'query'); 
+        //ddbg($exeArgs,'query args');
 		$this->stmt->execute($exeArgs);
 		unset($exeArgs);
 		

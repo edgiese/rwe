@@ -37,6 +37,10 @@ node_modules
 g/*
 p/*
 t/*
+m/tracefile.txt
+m/formfile.txt
+m/ajaxfile.txt
+m/editfile.txt
 
 # rwe
 tracefile

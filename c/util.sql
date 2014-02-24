@@ -3,11 +3,12 @@
 UPDATE _state SET statestring=:statestring,lasthit=:lasthit WHERE statekey=:key
 
 --:stateclean:D flushes old data from the state table
-DELETE FROM _state WHERE timeout > 0 AND TIMESTAMPDIFF(SECOND,lasthit,CURRENT_TIMESTAMP) > timeout 
+-->timestamp:4
+DELETE FROM _state WHERE timeout > 0 AND TIMESTAMPDIFF(SECOND,lasthit,:timestamp) > timeout 
 
 --:state:C creates a new state entry
--->key:4,timeout:2,statestring:4
-INSERT INTO _state (statekey,timeout,statestring) VALUES (:key,:timeout,:statestring)
+-->key:4,timeout:2,statestring:4,lasthit:4
+INSERT INTO _state (statekey,timeout,statestring,lasthit) VALUES (:key,:timeout,:statestring,:lasthit)
 
 --:state:R gets state string from key
 -->key:4
